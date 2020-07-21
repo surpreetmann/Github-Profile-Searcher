@@ -14,8 +14,8 @@
         </div>
     </form>
     <div *ngIf="searchResults; else elseBlock"><br>
-        <button class="btn btn-info">High to low</button>&nbsp;
-        <button class="btn btn-info">Low To High</button><br>
+        <button class="btn btn-info" (click)="sortDesc()">High to low</button>&nbsp;
+        <button class="btn btn-info" (click)="sortAsc">Low To High</button><br>
         <div id ="rowid" class ="row" ><br>
             <div *ngFor="let result of searchResults.items">  
                 <br><div class="col-sm">
