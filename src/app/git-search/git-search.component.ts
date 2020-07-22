@@ -39,8 +39,8 @@ export class GitSearchComponent implements OnInit {
 
   
   gitSearch=()=>{
-    this.GitSearchService.gitSearch(this.searchQuery).then((response)=>{
-      this.searchResults=response;
+    this.GitSearchService.gitSearch(this.searchQuery).then((response:any)=>{
+      this.searchResults=response.items;
     }, (error)=>{
       alert("Error: " +error.statusText)
     })

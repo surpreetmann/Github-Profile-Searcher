@@ -24,7 +24,7 @@
             (scrolled)="onScroll()"
             > 
         <div id ="rowid" class ="row" ><br>
-            <div *ngFor="let result of searchResults.items">  
+            <div *ngFor="let result of searchResults">  
                 <br><div class="col-sm">
                     <div class="card" style="width: 18rem;" (click)="openModal(template,result.login)"> 
                             <img class="card-img-top" src={{result.avatar_url}} alt="Card image cap"/>
@@ -56,17 +56,6 @@
             <b> <p class="btn btn-success btn-sm">{{"Followers : "}} </p></b>&nbsp;&nbsp;&nbsp;&nbsp;<p class="btn btn-warning btn-sm">{{secondData?.followers}}</p><br>
             <b><p class="btn btn-success btn-sm">{{"Following : " }} </p></b>&nbsp;&nbsp;&nbsp;&nbsp;<p class="btn btn-warning btn-sm">{{secondData?.following}}</p><br>
             <b><p class="btn btn-success btn-sm">{{"Created At : " }}</p> </b>&nbsp;&nbsp;&nbsp;&nbsp;<p class="btn btn-warning btn-sm">{{secondData?.created_at | date}}</p><br>
-        </div>
-    </div>
-    <div class="row pb-5">
-        <div class="col-md-12 p-5">
-            <ngx-spinner
-            bdOpacity = 0.9
-            bdColor = ""
-            size = "default"
-            color = "#581f87"
-            type = "ball-pulse-sync"
-            [fullScreen] = "false"></ngx-spinner>
         </div>
     </div>
 </ng-template>
