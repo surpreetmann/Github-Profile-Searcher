@@ -3,36 +3,59 @@
     <form class="card card-sm">
         <div class="card-body row no-gutters align-items-center">
             <div class="col-auto">
-                <i class="fas fa-search h4 text-body"></i>
+                <i class="fa fa-search " id="searchIcon"></i>
             </div>
             <div class="col">
                 <input class="form-control" name="query" id="query" placeholder="Enter here..." [(ngModel)]="searchQuery">
             </div>
             <div class="col-auto">
-                <button id="submitBtn" class="btn btn-primary" (click)="gitSearch()">Submit</button>
+                <button id="submitBtn" class="btn btn-success" (click)="gitSearch()">Submit</button>
             </div>
         </div>
     </form>
     <div *ngIf="searchResults; else elseBlock"><br>
-        <button class="btn btn-info" (click)="sortDesc()">High to low</button>&nbsp;
-        <button class="btn btn-info" (click)="sortAsc">Low To High</button><br>
+        <button class="btn btn-warning" (click)="sortDesc()">High to low</button>&nbsp;
+        <button class="btn btn-warning" (click)="sortAsc()">Low To High</button><br>
         <div id ="rowid" class ="row" ><br>
             <div *ngFor="let result of searchResults.items">  
                 <br><div class="col-sm">
-                    <div class="card" style="width: 18rem;"> 
-                        <a [href]="result.html_url"> 
+                    <div class="card" style="width: 18rem;" (click)="openModal(template,result.login)"> 
                             <img class="card-img-top" src={{result.avatar_url}} alt="Card image cap"/>
                             <div class="card-body" id="title">
                                 <p class="card-text">USERNAME : {{result.login}}</p>
                                 <p class="text gray-800">SCORE : {{result.score}}</p>
                             </div>
-                        </a> 
                     </div>
                 </div>
             </div>   
         </div>
     </div>
+
+    <div *ngIf="userResults; else elseBlock1">
+        <h3>Result Printed</h3>
+    </div>
 <ng-template #elseBlock>Loading...</ng-template>
 </div>
+<ng-template #template>
+    <div class="modal-header" id="modalHeader">
+        <h4 class="modal-title pull-left"> <p class="btn btn-success btn-sm">USERNAME : </p>&nbsp;&nbsp;&nbsp;&nbsp;<p class="btn btn-warning btn-sm"><b style="font-size: 18px;">{{secondData.login}}</b></p></h4>&nbsp;&nbsp;&nbsp;
+        <i *ngIf="secondData?.site_admin==false" class="fa fa-flag " style="font-size: 40px;" aria-hidden="true"></i>
+        <i *ngIf="secondData?.site_admin==true" class="fa fa-flag-o " style="font-size: 40px;"aria-hidden="true"></i>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body" id="modalBody">
+        <div infinite-scroll='loadMore()' infinite-scroll-distance='2'>
+            <br>
+            <b><p class="btn btn-success btn-sm">{{"Public Repositories : "}}</p></b>&nbsp;&nbsp;&nbsp;&nbsp;<p class="btn btn-warning btn-sm">{{secondData?.public_repos}}</p><br>
+            <b> <p class="btn btn-success btn-sm">{{"Followers : "}} </p></b>&nbsp;&nbsp;&nbsp;&nbsp;<p class="btn btn-warning btn-sm">{{secondData?.followers}}</p><br>
+            <b><p class="btn btn-success btn-sm">{{"Following : " }} </p></b>&nbsp;&nbsp;&nbsp;&nbsp;<p class="btn btn-warning btn-sm">{{secondData?.following}}</p><br>
+            <b><p class="btn btn-success btn-sm">{{"Created At : " }}</p> </b>&nbsp;&nbsp;&nbsp;&nbsp;<p class="btn btn-warning btn-sm">{{secondData?.created_at | date}}</p><br>
+        </div>
+    </div>
+</ng-template>
 
 
+
+ 

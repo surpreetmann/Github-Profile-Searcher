@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GitSearch } from './git-search';
 import { HttpClient } from '@angular/common/http';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -66,4 +65,9 @@ export class GitSearchService {
     })
     return promise;
   }
+
+  getSecondApi(user : String)
+{
+  return this.http.get("https://api.github.com/users/"+user);
+}
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {GitSearchService} from '../git-search.service'
 import {GitSearch} from '../git-search'
+import {TemplateRef} from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-git-search',
@@ -11,7 +13,21 @@ export class GitSearchComponent implements OnInit {
 
   searchResults: GitSearch;
   searchQuery: string;
-  constructor(private GitSearchService: GitSearchService) { }
+  secondData: any;
+  modalRef: BsModalRef;
+
+  constructor(private GitSearchService: GitSearchService,private modalService: BsModalService) { }
+  openModal(template: TemplateRef<any>,user) {
+    this.modalRef = this.modalService.show(template);
+    this.GitSearchService.getSecondApi(user).subscribe(data =>
+      {
+        
+        this.secondData=data;
+        console.log(this.secondData);
+      }
+
+    )
+  }
 
   ngOnInit(): void {
 
@@ -25,3 +41,5 @@ export class GitSearchComponent implements OnInit {
     })
   }
 }
+
+

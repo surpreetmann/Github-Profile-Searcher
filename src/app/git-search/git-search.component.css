@@ -1,5 +1,5 @@
  .container {
- background-color: grey;
+ background-color: rgb(235, 221, 221);
  margin-right: 120px;
 }
 .total {
@@ -27,4 +27,10 @@
 
 #submitBtn{
     margin-right: 150px;
+    margin-left: 20px;;
 }
+
+#modalHeader {
+    background-color: rgb(235, 221, 221);
+}
+
