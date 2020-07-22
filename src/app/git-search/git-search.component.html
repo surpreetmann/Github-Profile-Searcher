@@ -12,12 +12,15 @@
                 <button id="submitBtn" class="btn btn-success" (click)="gitSearch()">Submit</button>
             </div>
         </div>
-    </form>
+    </form>  
     <div *ngIf="searchResults; else elseBlock"><br>
         <button class="btn btn-warning" (click)="sortDesc()">High to low</button>&nbsp;
         <button class="btn btn-warning" (click)="sortAsc()">Low To High</button><br>
         <div id ="rowid" class ="row" ><br>
-            <div *ngFor="let result of searchResults.items">  
+            <div *ngFor="let result of searchResults.items | paginate:{id:'list_pagination',
+            itemsPerPage:perPage,
+            currentPage:page,
+            totalItems:30}">  
                 <br><div class="col-sm">
                     <div class="card" style="width: 18rem;" (click)="openModal(template,result.login)"> 
                             <img class="card-img-top" src={{result.avatar_url}} alt="Card image cap"/>
@@ -29,10 +32,7 @@
                 </div>
             </div>   
         </div>
-    </div>
-
-    <div *ngIf="userResults; else elseBlock1">
-        <h3>Result Printed</h3>
+        <pagination-controls id="list_pagination" directionalLinks="true"  maxSize="5"[totalItems]="30" [(ngModel)]="currentPage" (pageChange)="setPage($event)"></pagination-controls>
     </div>
 <ng-template #elseBlock>Loading...</ng-template>
 </div>

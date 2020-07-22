@@ -15,7 +15,10 @@ export class GitSearchComponent implements OnInit {
   searchQuery: string;
   secondData: any;
   modalRef: BsModalRef;
-
+  currentPage=1;
+  totalItems=30;
+  page=0;
+  perPage=3;
   constructor(private GitSearchService: GitSearchService,private modalService: BsModalService) { }
   openModal(template: TemplateRef<any>,user) {
     this.modalRef = this.modalService.show(template);
@@ -39,6 +42,10 @@ export class GitSearchComponent implements OnInit {
     }, (error)=>{
       alert("Error: " +error.statusText)
     })
+  }
+
+  setPage(event){
+    this.page = event;
   }
 }
 
