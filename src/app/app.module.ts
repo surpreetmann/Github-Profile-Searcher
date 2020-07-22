@@ -7,7 +7,9 @@ import { GitSearchComponent } from './git-search/git-search.component';
 import { HttpClientModule } from '@angular/common/http';
 import { GitSearchService } from './git-search.service';
 import {ModalModule} from 'ngx-bootstrap/modal';
-import {NgxPaginationModule} from 'ngx-pagination';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import {NgxSpinnerModule} from 'ngx-spinner';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import {NgxPaginationModule} from 'ngx-pagination';
     FormsModule,
     HttpClientModule,
     ModalModule.forRoot(),
-    NgxPaginationModule
+    InfiniteScrollModule,
+    NgxSpinnerModule,
+    BrowserAnimationsModule
   ],
   providers: [GitSearchService],
   bootstrap: [AppComponent]
